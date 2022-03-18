@@ -12,13 +12,16 @@
     }
   </style>
   <body>
+    Search: <input type="text" name="carmodel" id="input">
+    <input type="submit" value="Submit" onclick="search()">
     <button id="but1" type="button" onclick="loadXMLDoc()">
-      Get my car collection
+      Get all data
     </button>
     <br /><br />
     <table id="demo"></table>
+    <p id="msg"></p>
     <br /><br />
-	<img id="carImage"></img>
+  	<img id="carImage"></img>
     <p id="carModel"></p>
     <p id="engineName"></p>
     <p id="cc"></p>
@@ -34,7 +37,37 @@
     <p id="sus"></p>
 
     <script>
-      function loadXMLDoc() {
+      function loadXMLDoc1() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "cars.xml", false);
+        xmlhttp.send();
+        return xmlhttp.responseXML;
+      }
+      function search(){
+        clearDOM();
+        xmlDoc = loadXMLDoc1();
+        console.log(xmlDoc)
+        x = xmlDoc.getElementsByTagName("Car");
+        input = document.getElementById("input").value;
+        size = input.length;
+
+        if (input == null || input == ""){
+          document.getElementById("demo").innerHTML = "";
+          document.getElementById("msg").innerHTML = "Please enter a search term";
+          return false;
+        }
+        for(let i=0;i<x.length;i++){
+          modelName = x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
+          nn = modelName.split(" ");
+          if(nn[0].toLowerCase() == input.toLowerCase() || nn[1].toLowerCase() == input.toLowerCase()){
+            document.getElementById("msg").innerHTML = "";
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("demo").innerHTML += "<tr><th>Model</th><th>Engine</th></tr>";
+            document.getElementById("demo").innerHTML += "<tr><td>" + x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue + "</td><td>" + x[i].getElementsByTagName("Specs")[0].getElementsByTagName("Engine")[0].getElementsByTagName("Name")[0].childNodes[0].nodeValue + "</td></tr>";
+          }
+        }
+      }
+      function clearDOM(){
         document.getElementById("carModel").innerHTML = "";
         document.getElementById("engineName").innerHTML = "";
         document.getElementById("cc").innerHTML = "";
@@ -49,6 +82,9 @@
         document.getElementById("bonnetCap").innerHTML = "";
         document.getElementById("sus").innerHTML = "";
         document.getElementById("carImage").setAttribute("src", "");
+      }
+      function loadXMLDoc() {
+        clearDOM();
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
