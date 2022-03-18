@@ -46,7 +46,7 @@
       function search(){
         clearDOM();
         xmlDoc = loadXMLDoc1();
-        console.log(xmlDoc)
+        // console.log(xmlDoc)
         x = xmlDoc.getElementsByTagName("Car");
         input = document.getElementById("input").value;
         size = input.length;
@@ -56,16 +56,23 @@
           document.getElementById("msg").innerHTML = "Please enter a search term";
           return false;
         }
-        for(let i=0;i<x.length;i++){
-          modelName = x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
-          nn = modelName.split(" ");
-          if(nn[0].toLowerCase() == input.toLowerCase() || nn[1].toLowerCase() == input.toLowerCase()){
+        let arr = Array.from(x);
+        let narr = [];
+        for(let i=0;i<arr.length;i++){
+          narr.push(arr[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue);
+        }
+        console.log(narr);
+        // const result = narr.filter(function(item, index){
+        //   console.log(item.toLowerCase().includes(input.toLowerCase()), index);
+        // });
+        document.getElementById("demo").innerHTML = "";
+        document.getElementById("demo").innerHTML += "<tr><th>Model</th><th>Engine</th></tr>";
+        const result = narr.filter((e,i)=>{
+          if (e.toLowerCase().includes(input.toLowerCase())){
             document.getElementById("msg").innerHTML = "";
-            document.getElementById("demo").innerHTML = "";
-            document.getElementById("demo").innerHTML += "<tr><th>Model</th><th>Engine</th></tr>";
             document.getElementById("demo").innerHTML += "<tr><td>" + x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue + "</td><td>" + x[i].getElementsByTagName("Specs")[0].getElementsByTagName("Engine")[0].getElementsByTagName("Name")[0].childNodes[0].nodeValue + "</td></tr>";
           }
-        }
+        })
       }
       function clearDOM(){
         document.getElementById("carModel").innerHTML = "";
