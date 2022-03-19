@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="jumbotron">Drug Repository</h1>
+    <div class="container">
+      <button class="btn btn-info" onclick="displayAll()">Show All Drug</button>
+    </div>
+    <br />
+    <div class="container">
+      <input type="text" id="input" class="form-control" />
+      <input
+        type="submit"
+        class="btn btn-primary"
+        value="Search"
+        onclick="search()"
+      />
+    </div>
+    <br /><br />
+    <div id="nav1" class="container"></div>
+    <div id="nav2" class="container"></div>
+    <div id="main" class="container"></div>
+    <script>
+      function search() {
+        document.getElementById("main").innerHTML = "";
+        input = document.getElementById("input").value;
+        size = input.length;
+        if (input == null || input == "") {
+          alert("Please enter a search term!");
+          return false;
+        }
+        [a, b, drug] = read();
+        var main = document.getElementById("main");
+        var table = document.createElement("table");
+        table.className = "table";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Drug Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Description";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Type of";
+        tr.appendChild(th);
+        table.appendChild(tr);
+        const res = drug.filter((e) => {
+          if (e.name.toLowerCase().includes(input.toLowerCase())) {
+            tr = document.createElement("tr");
+            th = document.createElement("th");
+            th.innerHTML = e.name;
+            tr.appendChild(th);
+            th = document.createElement("th");
+            th.innerHTML = e.description;
+            tr.appendChild(th);
+            th = document.createElement("th");
+            th.innerHTML = e.typeOf;
+            tr.appendChild(th);
+            table.appendChild(tr);
+          }
+        });
+        main.appendChild(table);
+      }
+      function loadXML() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "sample.xml", false);
+        xmlhttp.send();
+        return xmlhttp.responseXML;
+      }
+
+      function read() {
+        var xml = loadXML();
+        var root = xml.getElementsByTagName("rdf:RDF")[0];
+        var onto = root.getElementsByTagName("owl:Ontology")[0];
+        var classes = root.getElementsByTagName("owl:Class");
+        classes = Array.from(classes);
+        var parentClass = [];
+        for (let i = 0; i < classes.length; i++) {
+          var label = classes[i].getElementsByTagName("rdfs:subClassOf")[0];
+          if (label == undefined) {
+            parentClass[i] = {
+              index: i,
+              name: classes[i].getElementsByTagName("rdfs:label")[0].innerHTML,
+            };
+          }
+        }
+        var subClass = [];
+        for (let i = 0; i < classes.length; i++) {
+          var label = classes[i].getElementsByTagName("rdfs:subClassOf")[0];
+          if (label != undefined) {
+            subClass[i - 5] = {
+              index: i,
+              name: classes[i].attributes[0].nodeValue,
+              description:
+                classes[i].getElementsByTagName("rdfs:label")[0].innerHTML,
+              typeOf:
+                classes[i].getElementsByTagName("rdfs:subClassOf")[0]
+                  .attributes[0].nodeValue,
+            };
+          }
+        }
+        var drugs = root.getElementsByTagName("owl:Thing");
+        drugs = Array.from(drugs);
+        var drug = [];
+        for (let i = 0; i < drugs.length; i++) {
+          drug[i] = {
+            name: drugs[i].getElementsByTagName("rdfs:label")[0].childNodes[0]
+              .nodeValue,
+            description:
+              drugs[i].getElementsByTagName("rdfs:comment")[0].childNodes[0]
+                .nodeValue,
+            typeOf:
+              drugs[i].getElementsByTagName("rdfs:subClassOf")[0].attributes[0]
+                .nodeValue,
+          };
+        }
+        return [parentClass, subClass, drug];
+      }
+      function displayAll() {
+        clear();
+        [a, b, drugName] = read();
+        var main = document.getElementById("main");
+        var table = document.createElement("table");
+        table.className = "table";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Drug Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Description";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Type of";
+        tr.appendChild(th);
+        table.appendChild(tr);
+        for (let i = 0; i < drugName.length; i++) {
+          tr = document.createElement("tr");
+          th = document.createElement("th");
+          th.innerHTML = drugName[i].name;
+          tr.appendChild(th);
+          th = document.createElement("th");
+          th.innerHTML = drugName[i].description;
+          tr.appendChild(th);
+          th = document.createElement("th");
+          th.innerHTML = drugName[i].typeOf;
+          tr.appendChild(th);
+          table.appendChild(tr);
+        }
+        main.appendChild(table);
+      }
+
+      function clear() {
+        document.getElementById("nav2").innerHTML = "";
+        document.getElementById("main").innerHTML = "";
+      }
+      (() => {
+        [parentClass, subClass, drug] = read();
+        var nav = document.getElementById("nav1");
+        for (let i = 0; i < parentClass.length; i++) {
+          var button = document.createElement("button");
+          button.className = "btn btn-primary";
+          button.innerHTML = parentClass[i].name;
+          button.onclick = function () {
+            clear();
+            displaySubClass(parentClass[i].name);
+          };
+          nav.appendChild(button);
+          nav.appendChild(document.createTextNode("\u00A0"));
+        }
+        nav.appendChild(document.createElement("br"));
+        nav.appendChild(document.createElement("br"));
+
+        function displaySubClass(name) {
+          name = name.replace(/\s+/g, "");
+          var nav2 = document.getElementById("nav2");
+          for (let i = 0; i < subClass.length; i++) {
+            if (subClass[i].typeOf == name) {
+              var btn = document.createElement("button");
+              btn.className = "btn btn-secondary";
+              btn.innerHTML = subClass[i].name;
+              btn.onclick = function () {
+                document.getElementById("main").innerHTML = "";
+                displayDrug(subClass[i].name);
+              };
+              nav2.appendChild(btn);
+              nav2.appendChild(document.createTextNode("\u00A0"));
+            }
+          }
+        }
+
+        function displayDrug(name) {
+          name = name.replace(/\s+/g, "");
+          var main = document.getElementById("main");
+          var table = document.createElement("table");
+          table.className = "table";
+          var tr = document.createElement("tr");
+          var th = document.createElement("th");
+          th.innerHTML = "Drug Name";
+          tr.appendChild(th);
+          th = document.createElement("th");
+          th.innerHTML = "Description";
+          tr.appendChild(th);
+          th = document.createElement("th");
+          th.innerHTML = "Type of";
+          tr.appendChild(th);
+          table.appendChild(tr);
+          for (let i = 0; i < drug.length; i++) {
+            if (drug[i].typeOf == name) {
+              tr = document.createElement("tr");
+              th = document.createElement("th");
+              th.innerHTML = drug[i].name;
+              tr.appendChild(th);
+              th = document.createElement("th");
+              th.innerHTML = drug[i].description;
+              tr.appendChild(th);
+              th = document.createElement("th");
+              th.innerHTML = drug[i].typeOf;
+              tr.appendChild(th);
+              table.appendChild(tr);
+            }
+          }
+          main.appendChild(document.createElement("br"));
+          main.appendChild(table);
+        }
+      })();
+    </script>
+  </body>
+</html>
