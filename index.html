@@ -7,34 +7,25 @@
       crossorigin="anonymous"
     />
   </head>
-  <style>
-    table,
-    th,
-    td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    th,
-    td {
-      padding: 5px;
-    }
-  </style>
   <body>
-    Search: <input type="text" name="carmodel" id="input" />
-    <input
-      type="submit"
-      value="Submit"
-      class="btn btn-primary"
-      onclick="search()"
-    />&nbsp;
-    <button
-      id="but1"
-      type="button"
-      class="btn btn-primary"
-      onclick="readCarInfo()"
-    >
-      Get all data
-    </button>
+    <h1 class="jumbotron">Car Catalog</h1>
+    <div class="container">
+      Search: <input type="text" name="carmodel" id="input" />
+      <input
+        type="submit"
+        value="Submit"
+        class="btn btn-primary"
+        onclick="search()"
+      />&nbsp;
+      <button
+        id="but1"
+        type="button"
+        class="btn btn-primary"
+        onclick="readCarInfo()"
+      >
+        Get all data
+      </button>
+    </div>
     <br /><br />
     <div id="demo" class="container"></div>
     <p id="msg"></p>
@@ -144,13 +135,14 @@
         document.getElementById("carImage").setAttribute("src", "");
         document.getElementById("msg").innerHTML = "";
         document.getElementById("card").style.display = "none";
+        document.getElementById("demo").innerHTML = "";
       }
       function readCarInfo() {
         clearDOM();
         var i;
         var xmlDoc = loadXMLDoc1();
         var table = document.createElement("table");
-        table.className = "table";
+        table.setAttribute("class", "table");
         var tr = document.createElement("tr");
         var th = document.createElement("th");
         th.innerHTML = "Segments";
