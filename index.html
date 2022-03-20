@@ -1,4 +1,12 @@
 <html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
   <style>
     table,
     th,
@@ -12,30 +20,53 @@
     }
   </style>
   <body>
-    Search: <input type="text" name="carmodel" id="input">
-    <input type="submit" value="Submit" onclick="search()">
-    <button id="but1" type="button" onclick="loadXMLDoc()">
+    Search: <input type="text" name="carmodel" id="input" />
+    <input
+      type="submit"
+      value="Submit"
+      class="btn btn-primary"
+      onclick="search()"
+    />&nbsp;
+    <button
+      id="but1"
+      type="button"
+      class="btn btn-primary"
+      onclick="readCarInfo()"
+    >
       Get all data
     </button>
     <br /><br />
-    <table id="demo"></table>
+    <div id="demo" class="container"></div>
     <p id="msg"></p>
     <br /><br />
-  	<img id="carImage"></img>
-    <p id="carModel"></p>
-    <p id="engineName"></p>
-    <p id="cc"></p>
-    <p id="ps"></p>
-    <p id="nm"></p>
-    <p id="trans"></p>
-    <p id="maxspeed"></p>
-    <p id="numPass"></p>
-    <p id="sty"></p>
-    <p id="seatMat"></p>
-    <p id="seatHook"></p>
-    <p id="bonnetCap"></p>
-    <p id="sus"></p>
-
+    <div class="container">
+      <div
+        class="card flex-row flex-wrap"
+        id="card"
+        style="width: 20rem; display: none"
+      >
+        <div class="card-header border-0">
+          <img class="card-img-top" id="carImage" />
+        </div>
+        <div class="card-block px-2">
+          <h5 class="card-title" id="carModel"></h5>
+          <p class="card-text" id="engineName"></p>
+          <p class="card-text" id="cc"></p>
+          <p class="card-text" id="ps"></p>
+          <p class="card-text" id="nm"></p>
+          <p class="card-text" id="trans"></p>
+          <p class="card-text" id="maxspeed"></p>
+          <p class="card-text" id="numPass"></p>
+          <p class="card-text" id="sty"></p>
+          <p class="card-text" id="seatMat"></p>
+          <p class="card-text" id="seatHook"></p>
+          <p class="card-text" id="bonnetCap"></p>
+          <p class="card-text" id="sus"></p>
+          <div class="h-10"></div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
     <script>
       function loadXMLDoc1() {
         var xmlhttp = new XMLHttpRequest();
@@ -43,7 +74,7 @@
         xmlhttp.send();
         return xmlhttp.responseXML;
       }
-      function search(){
+      function search() {
         clearDOM();
         xmlDoc = loadXMLDoc1();
         // console.log(xmlDoc)
@@ -51,30 +82,52 @@
         input = document.getElementById("input").value;
         size = input.length;
 
-        if (input == null || input == ""){
+        if (input == null || input == "") {
           document.getElementById("demo").innerHTML = "";
-          document.getElementById("msg").innerHTML = "Please enter a search term";
+          document.getElementById("msg").innerHTML =
+            "Please enter a search term";
           return false;
         }
         let arr = Array.from(x);
         let narr = [];
-        for(let i=0;i<arr.length;i++){
-          narr.push(arr[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue);
+        for (let i = 0; i < arr.length; i++) {
+          narr.push(
+            arr[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue
+          );
         }
-        console.log(narr);
-        // const result = narr.filter(function(item, index){
-        //   console.log(item.toLowerCase().includes(input.toLowerCase()), index);
-        // });
+        // console.log(narr);
         document.getElementById("demo").innerHTML = "";
-        document.getElementById("demo").innerHTML += "<tr><th>Model</th><th>Engine</th></tr>";
-        const result = narr.filter((e,i)=>{
-          if (e.toLowerCase().includes(input.toLowerCase())){
+        var table = document.createElement("table");
+        table.className = "table";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Model";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Engine";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        const result = narr.filter((e, i) => {
+          if (e.toLowerCase().includes(input.toLowerCase())) {
             document.getElementById("msg").innerHTML = "";
-            document.getElementById("demo").innerHTML += "<tr><td>" + x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue + "</td><td>" + x[i].getElementsByTagName("Specs")[0].getElementsByTagName("Engine")[0].getElementsByTagName("Name")[0].childNodes[0].nodeValue + "</td></tr>";
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.innerHTML =
+              x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = x[i]
+              .getElementsByTagName("Specs")[0]
+              .getElementsByTagName("Engine")[0]
+              .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            tr.appendChild(td);
+            table.appendChild(tr);
+            document.getElementById("demo").appendChild(table);
           }
-        })
+        });
       }
-      function clearDOM(){
+      function clearDOM() {
         document.getElementById("carModel").innerHTML = "";
         document.getElementById("engineName").innerHTML = "";
         document.getElementById("cc").innerHTML = "";
@@ -89,103 +142,142 @@
         document.getElementById("bonnetCap").innerHTML = "";
         document.getElementById("sus").innerHTML = "";
         document.getElementById("carImage").setAttribute("src", "");
+        document.getElementById("msg").innerHTML = "";
+        document.getElementById("card").style.display = "none";
       }
-      function loadXMLDoc() {
+      function readCarInfo() {
         clearDOM();
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            readCarInfo(this);
-          }
-        };
-        xmlhttp.open("GET", "cars.xml", true);
-        xmlhttp.send();
-      }
-      function readCarInfo(xml) {
         var i;
-        var xmlDoc = xml.responseXML;
-        var table = "<tr><th>Segments</th><th>Model</th><th>Year</th></tr>";
+        var xmlDoc = loadXMLDoc1();
+        var table = document.createElement("table");
+        table.className = "table";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Model";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
         var x = xmlDoc.getElementsByTagName("Car");
-        for (i = 0; i < x.length; i++) {
-          table +=
-            "<tr><td>" +
-            x[i].getElementsByTagName("Segments")[0].childNodes[0].nodeValue +
-            "</td><td><button onclick=(function(){document.getElementById('demo').innerHTML='';document.getElementById('carImage').setAttribute('src','asset/"+
-				x[i].getElementsByTagName("Image")[0].childNodes[0].nodeValue
-				+"');document.getElementById('carModel').innerHTML='Model:" +
-            x[i].getElementsByTagName("Model")[0].childNodes[0].nodeValue +
-            "';document.getElementById('engineName').innerHTML='Engine:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("Name")[0].childNodes[0].nodeValue +
-            "';document.getElementById('cc').innerHTML='CC:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
-            "';document.getElementById('ps').innerHTML='PS:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("PS")[0].childNodes[0].nodeValue +
-            "';document.getElementById('nm').innerHTML='NM:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
-            "';document.getElementById('trans').innerHTML='Transmission:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("Trans")[0].childNodes[0].nodeValue +
-            "';document.getElementById('maxspeed').innerHTML='MaxSpeed:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("Engine")[0]
-              .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue +
-            "';document.getElementById('numPass').innerHTML='NumberOfPassengers:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
-              .nodeValue +
-            "';document.getElementById('sty').innerHTML='Style:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("Style")[0].childNodes[0].nodeValue +
-            "';document.getElementById('seatMat').innerHTML='SeatMaterial:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("SeatMaterial")[0].childNodes[0].nodeValue +
-            "';document.getElementById('seatHook').innerHTML='SeatHook:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue +
-            "';document.getElementById('bonnetCap').innerHTML='BonnetCap:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
-              .nodeValue +
-            "';document.getElementById('sus').innerHTML='Suspension:" +
-            x[i]
-              .getElementsByTagName("Specs")[0]
-              .getElementsByTagName("BodyStyle")[0]
-              .getElementsByTagName("Sus")[0].childNodes[0].nodeValue +
-            "';})()>" +
-            x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue +
-            "</button></td><td>" +
-            x[i].getElementsByTagName("Year")[0].childNodes[0].nodeValue +
-            "</td></tr>";
-        }
-        document.getElementById("demo").innerHTML = table;
+        for (i = 0; i < x.length; i++)
+          (function (i) {
+            tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.innerHTML =
+              x[i].getElementsByTagName("Segments")[0].childNodes[0].nodeValue;
+            tr.appendChild(td);
+            var btn = document.createElement("button");
+            td = document.createElement("td");
+            btn.innerHTML =
+              x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
+            btn.onclick = function () {
+              document.getElementById("demo").innerHTML = "";
+              document.getElementById("card").style.display = "block";
+              document
+                .getElementById("carImage")
+                .setAttribute(
+                  "src",
+                  "asset/" +
+                    x[i].getElementsByTagName("Image")[0].childNodes[0]
+                      .nodeValue
+                );
+              document.getElementById("carModel").innerHTML =
+                x[i].getElementsByTagName(
+                  "ModelName"
+                )[0].childNodes[0].nodeValue;
+              document.getElementById("engineName").innerHTML =
+                "Engine Name: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+              document.getElementById("cc").innerHTML =
+                "Engine Capacity: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+                "cc";
+              document.getElementById("ps").innerHTML =
+                "PS: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+              document.getElementById("nm").innerHTML =
+                "Torque: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+                "Nm";
+              document.getElementById("trans").innerHTML =
+                "Transmission: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+              document.getElementById("maxspeed").innerHTML =
+                "Max Speed: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+              document.getElementById("numPass").innerHTML =
+                "Number of Passengers: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                  .nodeValue +
+                " persons";
+              document.getElementById("sty").innerHTML =
+                "Style: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+              document.getElementById("seatMat").innerHTML =
+                "Seat Material: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                  .nodeValue;
+              document.getElementById("seatHook").innerHTML =
+                "Seat Hook: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+              document.getElementById("bonnetCap").innerHTML =
+                "Bonnet Capacity: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                  .nodeValue;
+              document.getElementById("sus").innerHTML =
+                "Suspension Type: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+            };
+            td.append(btn);
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML =
+              x[i].getElementsByTagName("Year")[0].childNodes[0].nodeValue;
+            tr.appendChild(td);
+            table.appendChild(tr);
+          })(i);
+        document.getElementById("demo").appendChild(table);
       }
-
-      function callCar(counter, doc) {}
     </script>
   </body>
 </html>

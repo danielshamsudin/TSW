@@ -10,7 +10,7 @@
 				<CC>998</CC>
 				<PS>67</PS>
 				<Nm>90</Nm>
-				<Trans>4-Speed-Automatic</Trans>
+				<Trans>4-Speed Automatic</Trans>
 				<MaxSpeed>155kmh</MaxSpeed>
 			</Engine>
 			<BodyStyle>
@@ -19,7 +19,7 @@
 				<SeatMaterial>Fabric</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
 				<BonnetCapacity>260L</BonnetCapacity>
-				<Sus>Torsion-Beam</Sus>
+				<Sus>Torsion Beam</Sus>
 			</BodyStyle>
 		</Specs>
 		<Image>axia.jpg</Image>
