@@ -26,15 +26,36 @@
         Get all data
       </button>
     </div>
+    <br />
+    <div class="btn-group" role="group" style="padding-left: 5rem">
+      Sort By: &nbsp;&nbsp;
+      <button class="btn btn-info" onclick="sortName()">Name</button>
+      <button class="btn btn-info" onclick="sortEngineName()">
+        Engine Name
+      </button>
+      <button class="btn btn-info" onclick="sortEngineCapacity()">
+        Engine Capacity
+      </button>
+      <button class="btn btn-info" onclick="sortPS()">PS</button>
+      <button class="btn btn-info" onclick="sortBonnet()">
+        Bonnet Capacity
+      </button>
+    </div>
     <br /><br />
     <div id="demo" class="container"></div>
     <p id="msg"></p>
     <br /><br />
-    <div class="container">
+
+    <div class="container" style="margin: auto; width: 50%">
       <div
         class="card flex-row flex-wrap"
         id="card"
-        style="width: 20rem; display: none"
+        style="
+          width: 20rem;
+          display: none;
+          text-align: center;
+          align-items: center;
+        "
       >
         <div class="card-header border-0">
           <img class="card-img-top" id="carImage" />
@@ -59,6 +80,35 @@
     </div>
     <br /><br />
     <script>
+      const carData = [];
+      var xmlDoc = loadXMLDoc1();
+      var x = xmlDoc.getElementsByTagName("Car");
+      for (let i = 0; i < x.length; i++) {
+        carData.push({
+          segments:
+            x[i].getElementsByTagName("Segments")[0].childNodes[0].nodeValue,
+          carName:
+            x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue,
+          engineName: x[i]
+            .getElementsByTagName("Specs")[0]
+            .getElementsByTagName("Engine")[0]
+            .getElementsByTagName("Name")[0].childNodes[0].nodeValue,
+          cc: x[i]
+            .getElementsByTagName("Specs")[0]
+            .getElementsByTagName("Engine")[0]
+            .getElementsByTagName("CC")[0].childNodes[0].nodeValue,
+          ps: x[i]
+            .getElementsByTagName("Specs")[0]
+            .getElementsByTagName("Engine")[0]
+            .getElementsByTagName("PS")[0].childNodes[0].nodeValue,
+          bonnet: x[i]
+            .getElementsByTagName("Specs")[0]
+            .getElementsByTagName("BodyStyle")[0]
+            .getElementsByTagName("BonnetCapacity")[0].childNodes[0].nodeValue,
+          year: x[i].getElementsByTagName("Year")[0].childNodes[0].nodeValue,
+          id: i,
+        });
+      }
       function loadXMLDoc1() {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "cars.xml", false);
@@ -163,6 +213,7 @@
               x[i].getElementsByTagName("Segments")[0].childNodes[0].nodeValue;
             tr.appendChild(td);
             var btn = document.createElement("button");
+            btn.className = "btn btn-info";
             td = document.createElement("td");
             btn.innerHTML =
               x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
@@ -268,6 +319,677 @@
             tr.appendChild(td);
             table.appendChild(tr);
           })(i);
+        document.getElementById("demo").appendChild(table);
+      }
+      function sortName() {
+        clearDOM();
+        carData.sort(function (a, b) {
+          if (a.carName < b.carName) return -1;
+          if (a.carName > b.carName) return 1;
+          return 0;
+        });
+        var table = document.createElement("table");
+        table.className = "table";
+        table.innerHTML = "";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Car Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        for (let i = 0; i < carData.length; i++) {
+          tr = document.createElement("tr");
+          td = document.createElement("td");
+          td.innerHTML = carData[i].segments;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.className = "btn btn-info";
+          btn.innerHTML = carData[i].carName;
+          btn.onclick = function () {
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("card").style.display = "block";
+            document
+              .getElementById("carImage")
+              .setAttribute(
+                "src",
+                "asset/" +
+                  x[carData[i].id].getElementsByTagName("Image")[0]
+                    .childNodes[0].nodeValue
+              );
+            document.getElementById("carModel").innerHTML =
+              x[carData[i].id].getElementsByTagName(
+                "ModelName"
+              )[0].childNodes[0].nodeValue;
+            document.getElementById("engineName").innerHTML =
+              "Engine Name: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            document.getElementById("cc").innerHTML =
+              "Engine Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+              "cc";
+            document.getElementById("ps").innerHTML =
+              "PS: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+            document.getElementById("nm").innerHTML =
+              "Torque: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+              "Nm";
+            document.getElementById("trans").innerHTML =
+              "Transmission: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+            document.getElementById("maxspeed").innerHTML =
+              "Max Speed: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+            document.getElementById("numPass").innerHTML =
+              "Number of Passengers: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                .nodeValue +
+              " persons";
+            document.getElementById("sty").innerHTML =
+              "Style: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+            document.getElementById("seatMat").innerHTML =
+              "Seat Material: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("seatHook").innerHTML =
+              "Seat Hook: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+            document.getElementById("bonnetCap").innerHTML =
+              "Bonnet Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("sus").innerHTML =
+              "Suspension Type: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+          };
+          td.append(btn);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = carData[i].year;
+          tr.appendChild(td);
+          table.appendChild(tr);
+        }
+        document.getElementById("demo").appendChild(table);
+      }
+      function sortEngineName() {
+        clearDOM();
+        carData.sort(function (a, b) {
+          if (a.engineName < b.engineName) return -1;
+          if (a.engineName > b.engineName) return 1;
+          return 0;
+        });
+        var table = document.createElement("table");
+        table.className = "table";
+        table.innerHTML = "";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Car Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        for (let i = 0; i < carData.length; i++) {
+          tr = document.createElement("tr");
+          td = document.createElement("td");
+          td.innerHTML = carData[i].segments;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.className = "btn btn-info";
+          btn.innerHTML = carData[i].carName;
+          btn.onclick = function () {
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("card").style.display = "block";
+            document
+              .getElementById("carImage")
+              .setAttribute(
+                "src",
+                "asset/" +
+                  x[carData[i].id].getElementsByTagName("Image")[0]
+                    .childNodes[0].nodeValue
+              );
+            document.getElementById("carModel").innerHTML =
+              x[carData[i].id].getElementsByTagName(
+                "ModelName"
+              )[0].childNodes[0].nodeValue;
+            document.getElementById("engineName").innerHTML =
+              "Engine Name: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            document.getElementById("cc").innerHTML =
+              "Engine Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+              "cc";
+            document.getElementById("ps").innerHTML =
+              "PS: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+            document.getElementById("nm").innerHTML =
+              "Torque: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+              "Nm";
+            document.getElementById("trans").innerHTML =
+              "Transmission: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+            document.getElementById("maxspeed").innerHTML =
+              "Max Speed: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+            document.getElementById("numPass").innerHTML =
+              "Number of Passengers: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                .nodeValue +
+              " persons";
+            document.getElementById("sty").innerHTML =
+              "Style: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+            document.getElementById("seatMat").innerHTML =
+              "Seat Material: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("seatHook").innerHTML =
+              "Seat Hook: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+            document.getElementById("bonnetCap").innerHTML =
+              "Bonnet Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("sus").innerHTML =
+              "Suspension Type: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+          };
+          td.append(btn);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = carData[i].year;
+          tr.appendChild(td);
+          table.appendChild(tr);
+        }
+        document.getElementById("demo").appendChild(table);
+      }
+
+      function sortEngineCapacity() {
+        clearDOM();
+        carData.sort(function (a, b) {
+          if (parseInt(a.cc) < parseInt(b.cc)) return -1;
+          if (parseInt(a.cc) > parseInt(b.cc)) return 1;
+          return 0;
+        });
+        var table = document.createElement("table");
+        table.className = "table";
+        table.innerHTML = "";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Car Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        for (let i = 0; i < carData.length; i++) {
+          tr = document.createElement("tr");
+          td = document.createElement("td");
+          td.innerHTML = carData[i].segments;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.className = "btn btn-info";
+          btn.innerHTML = carData[i].carName;
+          btn.onclick = function () {
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("card").style.display = "block";
+            document
+              .getElementById("carImage")
+              .setAttribute(
+                "src",
+                "asset/" +
+                  x[carData[i].id].getElementsByTagName("Image")[0]
+                    .childNodes[0].nodeValue
+              );
+            document.getElementById("carModel").innerHTML =
+              x[carData[i].id].getElementsByTagName(
+                "ModelName"
+              )[0].childNodes[0].nodeValue;
+            document.getElementById("engineName").innerHTML =
+              "Engine Name: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            document.getElementById("cc").innerHTML =
+              "Engine Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+              "cc";
+            document.getElementById("ps").innerHTML =
+              "PS: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+            document.getElementById("nm").innerHTML =
+              "Torque: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+              "Nm";
+            document.getElementById("trans").innerHTML =
+              "Transmission: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+            document.getElementById("maxspeed").innerHTML =
+              "Max Speed: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+            document.getElementById("numPass").innerHTML =
+              "Number of Passengers: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                .nodeValue +
+              " persons";
+            document.getElementById("sty").innerHTML =
+              "Style: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+            document.getElementById("seatMat").innerHTML =
+              "Seat Material: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("seatHook").innerHTML =
+              "Seat Hook: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+            document.getElementById("bonnetCap").innerHTML =
+              "Bonnet Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("sus").innerHTML =
+              "Suspension Type: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+          };
+          td.append(btn);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = carData[i].year;
+          tr.appendChild(td);
+          table.appendChild(tr);
+        }
+        document.getElementById("demo").appendChild(table);
+      }
+      function sortPS() {
+        clearDOM();
+        carData.sort(function (a, b) {
+          if (parseInt(a.ps) < parseInt(b.ps)) return -1;
+          if (parseInt(a.ps) > parseInt(b.ps)) return 1;
+          return 0;
+        });
+        var table = document.createElement("table");
+        table.className = "table";
+        table.innerHTML = "";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Car Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        for (let i = 0; i < carData.length; i++) {
+          tr = document.createElement("tr");
+          td = document.createElement("td");
+          td.innerHTML = carData[i].segments;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.className = "btn btn-info";
+          btn.innerHTML = carData[i].carName;
+          btn.onclick = function () {
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("card").style.display = "block";
+            document
+              .getElementById("carImage")
+              .setAttribute(
+                "src",
+                "asset/" +
+                  x[carData[i].id].getElementsByTagName("Image")[0]
+                    .childNodes[0].nodeValue
+              );
+            document.getElementById("carModel").innerHTML =
+              x[carData[i].id].getElementsByTagName(
+                "ModelName"
+              )[0].childNodes[0].nodeValue;
+            document.getElementById("engineName").innerHTML =
+              "Engine Name: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            document.getElementById("cc").innerHTML =
+              "Engine Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+              "cc";
+            document.getElementById("ps").innerHTML =
+              "PS: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+            document.getElementById("nm").innerHTML =
+              "Torque: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+              "Nm";
+            document.getElementById("trans").innerHTML =
+              "Transmission: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+            document.getElementById("maxspeed").innerHTML =
+              "Max Speed: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+            document.getElementById("numPass").innerHTML =
+              "Number of Passengers: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                .nodeValue +
+              " persons";
+            document.getElementById("sty").innerHTML =
+              "Style: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+            document.getElementById("seatMat").innerHTML =
+              "Seat Material: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("seatHook").innerHTML =
+              "Seat Hook: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+            document.getElementById("bonnetCap").innerHTML =
+              "Bonnet Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("sus").innerHTML =
+              "Suspension Type: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+          };
+          td.append(btn);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = carData[i].year;
+          tr.appendChild(td);
+          table.appendChild(tr);
+        }
+        document.getElementById("demo").appendChild(table);
+      }
+      function sortBonnet() {
+        clearDOM();
+        carData.sort(function (a, b) {
+          if (a.bonnet < b.bonnet) return -1;
+          if (a.bonnet > b.bonnet) return 1;
+          return 0;
+        });
+        var table = document.createElement("table");
+        table.className = "table";
+        table.innerHTML = "";
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Segments";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Car Name";
+        tr.appendChild(th);
+        th = document.createElement("th");
+        th.innerHTML = "Year";
+        tr.appendChild(th);
+        table.appendChild(tr);
+
+        for (let i = 0; i < carData.length; i++) {
+          tr = document.createElement("tr");
+          td = document.createElement("td");
+          td.innerHTML = carData[i].segments;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.className = "btn btn-info";
+          btn.innerHTML = carData[i].carName;
+          btn.onclick = function () {
+            document.getElementById("demo").innerHTML = "";
+            document.getElementById("card").style.display = "block";
+            document
+              .getElementById("carImage")
+              .setAttribute(
+                "src",
+                "asset/" +
+                  x[carData[i].id].getElementsByTagName("Image")[0]
+                    .childNodes[0].nodeValue
+              );
+            document.getElementById("carModel").innerHTML =
+              x[carData[i].id].getElementsByTagName(
+                "ModelName"
+              )[0].childNodes[0].nodeValue;
+            document.getElementById("engineName").innerHTML =
+              "Engine Name: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+            document.getElementById("cc").innerHTML =
+              "Engine Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+              "cc";
+            document.getElementById("ps").innerHTML =
+              "PS: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+            document.getElementById("nm").innerHTML =
+              "Torque: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+              "Nm";
+            document.getElementById("trans").innerHTML =
+              "Transmission: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+            document.getElementById("maxspeed").innerHTML =
+              "Max Speed: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("Engine")[0]
+                .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+            document.getElementById("numPass").innerHTML =
+              "Number of Passengers: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                .nodeValue +
+              " persons";
+            document.getElementById("sty").innerHTML =
+              "Style: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+            document.getElementById("seatMat").innerHTML =
+              "Seat Material: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("seatHook").innerHTML =
+              "Seat Hook: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+            document.getElementById("bonnetCap").innerHTML =
+              "Bonnet Capacity: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .nodeValue;
+            document.getElementById("sus").innerHTML =
+              "Suspension Type: " +
+              x[carData[i].id]
+                .getElementsByTagName("Specs")[0]
+                .getElementsByTagName("BodyStyle")[0]
+                .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+          };
+          td.append(btn);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = carData[i].year;
+          tr.appendChild(td);
+          table.appendChild(tr);
+        }
         document.getElementById("demo").appendChild(table);
       }
     </script>
