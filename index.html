@@ -37,9 +37,7 @@
         Engine Capacity
       </button>
       <button class="btn btn-info" onclick="sortPS()">PS</button>
-      <button class="btn btn-info" onclick="sortBonnet()">
-        Bonnet Capacity
-      </button>
+      <button class="btn btn-info" onclick="sortBoot()">Boot Capacity</button>
     </div>
     <br /><br />
     <div id="demo" class="container"></div>
@@ -104,7 +102,7 @@
           bonnet: x[i]
             .getElementsByTagName("Specs")[0]
             .getElementsByTagName("BodyStyle")[0]
-            .getElementsByTagName("BonnetCapacity")[0].childNodes[0].nodeValue,
+            .getElementsByTagName("BootCapacity")[0].childNodes[0].nodeValue,
           year: x[i].getElementsByTagName("Year")[0].childNodes[0].nodeValue,
           id: i,
         });
@@ -298,11 +296,11 @@
                   .getElementsByTagName("BodyStyle")[0]
                   .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
               document.getElementById("bonnetCap").innerHTML =
-                "Bonnet Capacity: " +
+                "Boot Capacity: " +
                 x[i]
                   .getElementsByTagName("Specs")[0]
                   .getElementsByTagName("BodyStyle")[0]
-                  .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                  .getElementsByTagName("BootCapacity")[0].childNodes[0]
                   .nodeValue;
               document.getElementById("sus").innerHTML =
                 "Suspension Type: " +
@@ -433,11 +431,11 @@
                 .getElementsByTagName("BodyStyle")[0]
                 .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
             document.getElementById("bonnetCap").innerHTML =
-              "Bonnet Capacity: " +
+              "Boot Capacity: " +
               x[carData[i].id]
                 .getElementsByTagName("Specs")[0]
                 .getElementsByTagName("BodyStyle")[0]
-                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .getElementsByTagName("BootCapacity")[0].childNodes[0]
                 .nodeValue;
             document.getElementById("sus").innerHTML =
               "Suspension Type: " +
@@ -567,11 +565,11 @@
                 .getElementsByTagName("BodyStyle")[0]
                 .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
             document.getElementById("bonnetCap").innerHTML =
-              "Bonnet Capacity: " +
+              "Boot Capacity: " +
               x[carData[i].id]
                 .getElementsByTagName("Specs")[0]
                 .getElementsByTagName("BodyStyle")[0]
-                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .getElementsByTagName("BootCapacity")[0].childNodes[0]
                 .nodeValue;
             document.getElementById("sus").innerHTML =
               "Suspension Type: " +
@@ -702,11 +700,11 @@
                 .getElementsByTagName("BodyStyle")[0]
                 .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
             document.getElementById("bonnetCap").innerHTML =
-              "Bonnet Capacity: " +
+              "Boot Capacity: " +
               x[carData[i].id]
                 .getElementsByTagName("Specs")[0]
                 .getElementsByTagName("BodyStyle")[0]
-                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .getElementsByTagName("BootCapacity")[0].childNodes[0]
                 .nodeValue;
             document.getElementById("sus").innerHTML =
               "Suspension Type: " +
@@ -836,11 +834,11 @@
                 .getElementsByTagName("BodyStyle")[0]
                 .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
             document.getElementById("bonnetCap").innerHTML =
-              "Bonnet Capacity: " +
+              "Boot Capacity: " +
               x[carData[i].id]
                 .getElementsByTagName("Specs")[0]
                 .getElementsByTagName("BodyStyle")[0]
-                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .getElementsByTagName("BootCapacity")[0].childNodes[0]
                 .nodeValue;
             document.getElementById("sus").innerHTML =
               "Suspension Type: " +
@@ -858,7 +856,7 @@
         }
         document.getElementById("demo").appendChild(table);
       }
-      function sortBonnet() {
+      function sortBoot() {
         clearDOM();
         carData.sort(function (a, b) {
           if (a.bonnet < b.bonnet) return -1;
@@ -970,11 +968,11 @@
                 .getElementsByTagName("BodyStyle")[0]
                 .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
             document.getElementById("bonnetCap").innerHTML =
-              "Bonnet Capacity: " +
+              "Boot Capacity: " +
               x[carData[i].id]
                 .getElementsByTagName("Specs")[0]
                 .getElementsByTagName("BodyStyle")[0]
-                .getElementsByTagName("BonnetCapacity")[0].childNodes[0]
+                .getElementsByTagName("BootCapacity")[0].childNodes[0]
                 .nodeValue;
             document.getElementById("sus").innerHTML =
               "Suspension Type: " +

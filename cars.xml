@@ -1,7 +1,6 @@
 <Cars>
 	<Car>
 		<Segments>A</Segments>
-		<Model>PeroduaAxia</Model>
 		<ModelName>Perodua Axia</ModelName>
 		<Year>2014</Year>
 		<Specs>
@@ -18,7 +17,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Fabric</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>260L</BonnetCapacity>
+				<BootCapacity>260L</BootCapacity>
 				<Sus>Torsion Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -26,7 +25,6 @@
 	</Car>
 	<Car>
 		<Segments>A</Segments>
-		<Model>PeroduaBezza</Model>
 		<ModelName>Perodua Bezza</ModelName>
 		<Year>2017</Year>
 		<Specs>
@@ -43,7 +41,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Fabric</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>508L</BonnetCapacity>
+				<BootCapacity>508L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -51,7 +49,6 @@
 	</Car>
 	<Car>
 		<Segments>A</Segments>
-		<Model>ProtonSaga</Model>
 		<ModelName>Proton Saga</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -68,7 +65,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Fabric</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>420L</BonnetCapacity>
+				<BootCapacity>420L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -76,7 +73,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>PeroduaMyvi</Model>
 		<ModelName>Perodua Myvi</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -93,7 +89,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Fabric</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>277L</BonnetCapacity>
+				<BootCapacity>277L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -101,7 +97,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>Peugeot2008</Model>
 		<ModelName>Peugeot 2008</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -118,7 +113,7 @@
 				<Style>SUV</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>434L</BonnetCapacity>
+				<BootCapacity>434L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -126,7 +121,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>PeroduaAtiva</Model>
 		<ModelName>Perodua Ativa</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -143,7 +137,7 @@
 				<Style>SUV</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>369L</BonnetCapacity>
+				<BootCapacity>369L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -151,7 +145,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>ProtonIriz</Model>
 		<ModelName>Proton Iriz</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -168,7 +161,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>215L</BonnetCapacity>
+				<BootCapacity>215L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -176,7 +169,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>ProtonPersona</Model>
 		<ModelName>Proton Persona</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -193,7 +185,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>510L</BonnetCapacity>
+				<BootCapacity>510L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -201,7 +193,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>PeroduaAruz</Model>
 		<ModelName>Perodua Aruz</ModelName>
 		<Year>2020</Year>
 		<Specs>
@@ -218,7 +209,7 @@
 				<Style>SUV</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>Yes</SeatHook>
-				<BonnetCapacity>213L</BonnetCapacity>
+				<BootCapacity>213L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -226,7 +217,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>HondaCity</Model>
 		<ModelName>Honda City</ModelName>
 		<Year>2020</Year>
 		<Specs>
@@ -243,7 +233,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>506L</BonnetCapacity>
+				<BootCapacity>506L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -251,7 +241,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>HondaJazz</Model>
 		<ModelName>Honda Jazz</ModelName>
 		<Year>2020</Year>
 		<Specs>
@@ -268,7 +257,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>304L</BonnetCapacity>
+				<BootCapacity>304L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -276,7 +265,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>ToyotaVios</Model>
 		<ModelName>Toyota Vios</ModelName>
 		<Year>2020</Year>
 		<Specs>
@@ -293,7 +281,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>506L</BonnetCapacity>
+				<BootCapacity>506L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -301,7 +289,6 @@
 	</Car>
 	<Car>
 		<Segments>B</Segments>
-		<Model>ToyotaYaris</Model>
 		<ModelName>Toyota Yaris</ModelName>
 		<Year>2020</Year>
 		<Specs>
@@ -318,7 +305,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>286L</BonnetCapacity>
+				<BootCapacity>286L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -326,7 +313,6 @@
 	</Car>
 	<Car>
 		<Segments>C</Segments>
-		<Model>ToyotaCorolla</Model>
 		<ModelName>Toyota Corolla</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -343,7 +329,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>470L</BonnetCapacity>
+				<BootCapacity>470L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -351,7 +337,6 @@
 	</Car>
 	<Car>
 		<Segments>C</Segments>
-		<Model>ToyotaCorollaCrossHybrid</Model>
 		<ModelName>Toyota Corolla Cross Hybrid</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -368,7 +353,7 @@
 				<Style>SUV</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>487L</BonnetCapacity>
+				<BootCapacity>487L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -376,7 +361,6 @@
 	</Car>
 	<Car>
 		<Segments>C</Segments>
-		<Model>HondaCivic</Model>
 		<ModelName>Honda Civic</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -393,7 +377,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>478L</BonnetCapacity>
+				<BootCapacity>478L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -401,7 +385,6 @@
 	</Car>
 	<Car>
 		<Segments>C</Segments>
-		<Model>MazdaCX5</Model>
 		<ModelName>Mazda CX-5</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -418,7 +401,7 @@
 				<Style>SUV</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>506L</BonnetCapacity>
+				<BootCapacity>506L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -426,7 +409,6 @@
 	</Car>
 	<Car>
 		<Segments>C</Segments>
-		<Model>Mazda3</Model>
 		<ModelName>Mazda3</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -443,7 +425,7 @@
 				<Style>Hatchback</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>358L</BonnetCapacity>
+				<BootCapacity>358L</BootCapacity>
 				<Sus>Torsion-Beam</Sus>
 			</BodyStyle>
 		</Specs>
@@ -451,7 +433,6 @@
 	</Car>
 	<Car>
 		<Segments>D</Segments>
-		<Model>BMW330i</Model>
 		<ModelName>BMW 330i</ModelName>
 		<Year>2021</Year>
 		<Specs>
@@ -468,7 +449,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>480L</BonnetCapacity>
+				<BootCapacity>480L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -476,7 +457,6 @@
 	</Car>
 	<Car>
 		<Segments>D</Segments>
-		<Model>HondaAccord</Model>
 		<ModelName>Honda Accord</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -493,7 +473,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>570L</BonnetCapacity>
+				<BootCapacity>570L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -501,7 +481,6 @@
 	</Car>
 	<Car>
 		<Segments>D</Segments>
-		<Model>ToyotaCamry</Model>
 		<ModelName>Toyota Camry</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -518,7 +497,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>524L</BonnetCapacity>
+				<BootCapacity>524L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
@@ -526,7 +505,6 @@
 	</Car>
 	<Car>
 		<Segments>D</Segments>
-		<Model>VolkswagenArteonR-Line</Model>
 		<ModelName>Volkswagen Arteon R-Line</ModelName>
 		<Year>2022</Year>
 		<Specs>
@@ -543,7 +521,7 @@
 				<Style>Sedan</Style>
 				<SeatMaterial>Leather</SeatMaterial>
 				<SeatHook>No</SeatHook>
-				<BonnetCapacity>563L</BonnetCapacity>
+				<BootCapacity>563L</BootCapacity>
 				<Sus>Multi-link</Sus>
 			</BodyStyle>
 		</Specs>
