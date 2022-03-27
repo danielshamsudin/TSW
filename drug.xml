@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+<!ENTITY ns_drugs "file://sample.xml#Drugs">
+]>
+
+<rdf:RDF xmlns:xsd="&xsd;"
+	xmlns:rdf="&rdf;"
+	xmlns:rdfs="&rdfs;"
+	xmlns:owl="&owl;"
+	xmlns:ns_drugs="&ns_drugs;">
+
+	<owl:Ontology rdf:about="DrugsOntology">
+		<rdfs:label>General Medicine Repository</rdfs:label>
+		<rdfs:comment>A repository of general medicinal drugs used in civilization.</rdfs:comment>
+	</owl:Ontology>
+
+	<owl:Class rdf:about="Analgesic">
+		<rdfs:label>Analgesic</rdfs:label>
+		<rdfs:comment>Top-level root Class for analgesic-typed drug.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Antihistamine">
+		<rdfs:label>Antihistamine</rdfs:label>
+		<rdfs:comment>Top-level root Class for antihistamine.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Antiseptic">
+		<rdfs:label>Antiseptic</rdfs:label>
+		<rdfs:comment>Top-level root Class for antiseptics.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Stimulant">
+		<rdfs:label>Stimulant</rdfs:label>
+		<rdfs:comment>Top-level root Class for stimulants.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="MoodStabilizer">
+		<rdfs:label>Mood Stabilizer</rdfs:label>
+		<rdfs:comment>Top-level root Class for mood stabilizer.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="NSAID">
+		<rdfs:subClassOf rdf:resource="Analgesic"/>
+		<rdfs:label>Non-steriodal anti-inflammatory drug.</rdfs:label>
+		<rdfs:comment>sub Class of analgesic</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Opioid">
+		<rdfs:subClassOf rdf:resource="Analgesic"/>
+		<rdfs:label>Opioid.</rdfs:label>
+		<rdfs:comment>sub Class of analgesic</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Alcohol">
+		<rdfs:subClassOf rdf:resource="Analgesic"/>
+		<rdfs:label>Alcohol.</rdfs:label>
+		<rdfs:comment>sub Class of analgesic</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="H1">
+		<rdfs:subClassOf rdf:resource="Antihistamine"/>
+		<rdfs:label>H1 Blocker.</rdfs:label>
+		<rdfs:comment>sub Class of antihistamine</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="H2">
+		<rdfs:subClassOf rdf:resource="Antihistamine"/>
+		<rdfs:label>H2 Blocker.</rdfs:label>
+		<rdfs:comment>sub Class of antihistamine</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="H3">
+		<rdfs:subClassOf rdf:resource="Antihistamine"/>
+		<rdfs:label>H3 Receptor Antagonist.</rdfs:label>
+		<rdfs:comment>sub Class of antihistamine</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Phenol">
+		<rdfs:subClassOf rdf:resource="Antiseptic"/>
+		<rdfs:label>Phenol.</rdfs:label>
+		<rdfs:comment>sub Class of antiseptic.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Peroxide">
+		<rdfs:subClassOf rdf:resource="Antiseptic"/>
+		<rdfs:label>Peroxide.</rdfs:label>
+		<rdfs:comment>sub Class of antiseptic.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Iodine">
+		<rdfs:subClassOf rdf:resource="Antiseptic"/>
+		<rdfs:label>Iodine.</rdfs:label>
+		<rdfs:comment>sub Class of antiseptic.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Amphetamine">
+		<rdfs:subClassOf rdf:resource="Stimulant"/>
+		<rdfs:label>Amphetamine.</rdfs:label>
+		<rdfs:comment>sub Class of stimulant.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Caffeine">
+		<rdfs:subClassOf rdf:resource="Stimulant"/>
+		<rdfs:label>Caffeine.</rdfs:label>
+		<rdfs:comment>sub Class of stimulant.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Cocaine">
+		<rdfs:subClassOf rdf:resource="Stimulant"/>
+		<rdfs:label>Cocaine.</rdfs:label>
+		<rdfs:comment>sub Class of stimulant.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Mineral">
+		<rdfs:subClassOf rdf:resource="MoodStabilizer"/>
+		<rdfs:label>Mineral</rdfs:label>
+		<rdfs:comment>sub Class of mood stabilizer.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Anticonvulsant">
+		<rdfs:subClassOf rdf:resource="MoodStabilizer"/>
+		<rdfs:label>Anticonvulsant</rdfs:label>
+		<rdfs:comment>sub Class of mood stabilizer.</rdfs:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="Antipsychotic">
+		<rdfs:subClassOf rdf:resource="MoodStabilizer"/>
+		<rdfs:label>Antipsychotic</rdfs:label>
+		<rdfs:comment>sub Class of mood stabilizer.</rdfs:comment>
+	</owl:Class>
+	<!--NSAID  -->
+	<owl:Thing rdf:about="Aspirin">
+		<rdfs:subClassOf rdf:resource="NSAID"/>
+		<rdfs:label>Aspirin</rdfs:label>
+		<rdfs:comment>Medication used to reduce pain, fever or inflammation.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Ibuprofen">
+		<rdfs:subClassOf rdf:resource="NSAID"/>
+		<rdfs:label>Ibuprofen</rdfs:label>
+		<rdfs:comment>Medication primarily used for chronic pain management.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="SalicylicAcid">
+		<rdfs:subClassOf rdf:resource="NSAID"/>
+		<rdfs:label>Salicylic Acid</rdfs:label>
+		<rdfs:comment>Medication for inhibiting inflammation, used in treating acne.</rdfs:comment>
+	</owl:Thing>
+
+	<!--Opioid  -->
+	<owl:Thing rdf:about="Diamorphine">
+		<rdfs:subClassOf rdf:resource="Opioid"/>
+		<rdfs:label>Diamorphine</rdfs:label>
+		<rdfs:comment>A strong pain medication with extremely restricted legal use for cases such as childbirth and heart attack.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Oxycodone">
+		<rdfs:subClassOf rdf:resource="Opioid"/>
+		<rdfs:label>Oxycodone</rdfs:label>
+		<rdfs:comment>Medication for relieving moderate to severe pain.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Fentanyl">
+		<rdfs:subClassOf rdf:resource="Opioid"/>
+		<rdfs:label>Fentanyl</rdfs:label>
+		<rdfs:comment>The most powerful opioid analgesic in existence, typically used in palliative care.</rdfs:comment>
+	</owl:Thing>
+	<!--Alcohol  -->
+	<owl:Thing rdf:about="Ethanol">
+		<rdfs:subClassOf rdf:resource="Alcohol"/>
+		<rdfs:label>Ethanol</rdfs:label>
+		<rdfs:comment>Also known as drinking alcohol, used in medicine as an antidote for methanol poisoning.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Isopropanol">
+		<rdfs:subClassOf rdf:resource="Alcohol"/>
+		<rdfs:label>Isopropanol</rdfs:label>
+		<rdfs:comment>Also known as isopropyl alcohol, used extensively as a disinfectant.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Denatured">
+		<rdfs:subClassOf rdf:resource="Alcohol"/>
+		<rdfs:label>Denatured</rdfs:label>
+		<rdfs:comment>Ethanol with additives to discourage recreational use, used extensively for disinfection.</rdfs:comment>
+	</owl:Thing>
+	<!--H1  -->
+	<owl:Thing rdf:about="Doxepin">
+		<rdfs:subClassOf rdf:resource="H1"/>
+		<rdfs:label>Doxepin</rdfs:label>
+		<rdfs:comment>Antidepressant medication with strong antihistamine properties.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Hydroxyzine">
+		<rdfs:subClassOf rdf:resource="H1"/>
+		<rdfs:label>Hydroxyzine</rdfs:label>
+		<rdfs:comment>Medication used to treat allergic conditions such as contact dermatitis.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Doxylamine">
+		<rdfs:subClassOf rdf:resource="H1"/>
+		<rdfs:label>Doxylamine</rdfs:label>
+		<rdfs:comment>Antihistamine used to treat cold or allergy symptoms, with hypnotic properties.</rdfs:comment>
+	</owl:Thing>
+	<!--H2  -->
+	<owl:Thing rdf:about="Nizatidine">
+		<rdfs:subClassOf rdf:resource="H2"/>
+		<rdfs:label>Nizatidine</rdfs:label>
+		<rdfs:comment>Antihistamine medication used to treat stomach and intestinal ulcers by inhibiting stomach acid production.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Roxatidine">
+		<rdfs:subClassOf rdf:resource="H2"/>
+		<rdfs:label>Roxatidine</rdfs:label>
+		<rdfs:comment>Antihistamine medication used to treat gastric ulcers.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Famotidine">
+		<rdfs:subClassOf rdf:resource="H2"/>
+		<rdfs:label>Famotidine</rdfs:label>
+		<rdfs:comment>Antihistamine medication for relieving heartburn and gastritis.</rdfs:comment>
+	</owl:Thing>
+	<!--H3  -->
+	<owl:Thing rdf:about="Ciproxifan">
+		<rdfs:subClassOf rdf:resource="H3"/>
+		<rdfs:label>Ciproxifan</rdfs:label>
+		<rdfs:comment>Extremely potent antihistamine with properties of wakefulness and attentiveness.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Betahistine">
+		<rdfs:subClassOf rdf:resource="H3"/>
+		<rdfs:label>Betahistine</rdfs:label>
+		<rdfs:comment>Antihistamine medication for treating vertigo and other vertigo-like symptoms.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Conessine">
+		<rdfs:subClassOf rdf:resource="H3"/>
+		<rdfs:label>Conessine</rdfs:label>
+		<rdfs:comment>Powerful antihistamine used for treating dysentery.</rdfs:comment>
+	</owl:Thing>
+	<!--Phenol  -->
+	<owl:Thing rdf:about="Triclosan">
+		<rdfs:subClassOf rdf:resource="Phenol"/>
+		<rdfs:label>Triclosan</rdfs:label>
+		<rdfs:comment>Antiseptic agent found in toothpaste, soaps and detergents.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Chlorocresol">
+		<rdfs:subClassOf rdf:resource="Phenol"/>
+		<rdfs:label>Chlorocresol</rdfs:label>
+		<rdfs:comment>Antiseptic agent with alternative use as a preservative, allergic to users with sensitive skin.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Chloroxylenol">
+		<rdfs:subClassOf rdf:resource="Phenol"/>
+		<rdfs:label>Chloroxylenol</rdfs:label>
+		<rdfs:comment>Also known as Dettol, used extensively for disinfecting surgical instruments.</rdfs:comment>
+	</owl:Thing>
+	<!--Peroxide  -->
+	<owl:Thing rdf:about="HydrogenPeroxide">
+		<rdfs:subClassOf rdf:resource="Peroxide"/>
+		<rdfs:label>Hydrogen Peroxide</rdfs:label>
+		<rdfs:comment>Antiseptic agent with versatile use as an oxidizer and bleaching agent.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="BenzoylPeroxide">
+		<rdfs:subClassOf rdf:resource="Peroxide"/>
+		<rdfs:label>Benzoyl Peroxide</rdfs:label>
+		<rdfs:comment>Antiseptic agent with known medicinal use in treating acne.</rdfs:comment>
+	</owl:Thing>
+	<!--Iodine  -->
+	<owl:Thing rdf:about="Salt">
+		<rdfs:subClassOf rdf:resource="Iodine"/>
+		<rdfs:label>Iodized Salt</rdfs:label>
+		<rdfs:comment>Salt with minimal amounts of iodine to curb iodine deficiency.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="PotassiumIodide">
+		<rdfs:subClassOf rdf:resource="Iodine"/>
+		<rdfs:label>Potassium Iodide</rdfs:label>
+		<rdfs:comment>Salt of stable iodine for blocking absorption of radioactive iodine by the thyroid gland.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="PovidoneIodine">
+		<rdfs:subClassOf rdf:resource="Iodine"/>
+		<rdfs:label>Povidone-Iodine</rdfs:label>
+		<rdfs:comment>Antiseptic used for skin disinfection for injuries and surgeries.</rdfs:comment>
+	</owl:Thing>
+	<!--Amphetamine  -->
+	<owl:Thing rdf:about="DextroamphetamineSulfate">
+		<rdfs:subClassOf rdf:resource="Amphetamine"/>
+		<rdfs:label>Dextroamphetamine Sulfate</rdfs:label>
+		<rdfs:comment>Stimulant used to treat Attention Deficit Hyperactivity Disorder (ADHD)</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="AmphetamineSulfate">
+		<rdfs:subClassOf rdf:resource="Amphetamine"/>
+		<rdfs:label>Amphetamine Sulfate</rdfs:label>
+		<rdfs:comment>Stimulant used to treat ADHD and for assisting in weight loss.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Benzphetamine">
+		<rdfs:subClassOf rdf:resource="Amphetamine"/>
+		<rdfs:label>Benzphetamine</rdfs:label>
+		<rdfs:comment>Stimulant with anorectic properties, used for promoting weight loss by reducing appetite and increasing metabolism.</rdfs:comment>
+	</owl:Thing>
+	<!--Caffeine  -->
+	<owl:Thing rdf:about="Theophylline">
+		<rdfs:subClassOf rdf:resource="Caffeine"/>
+		<rdfs:label>Theophylline</rdfs:label>
+		<rdfs:comment>Stimulant used for respiratory diseases such as asthma, chronic bronchitis and emphysema.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Theobromine">
+		<rdfs:subClassOf rdf:resource="Caffeine"/>
+		<rdfs:label>Theobromine</rdfs:label>
+		<rdfs:comment>Stimulant typically found in chocolate and tea leaves, effects are considerably weaker than caffeine.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Paraxanthine">
+		<rdfs:subClassOf rdf:resource="Caffeine"/>
+		<rdfs:label>Paraxanthine</rdfs:label>
+		<rdfs:comment>Stimulant with stronger effects than caffeine with lower toxicity.</rdfs:comment>
+	</owl:Thing>
+	<!--Cocaine  -->
+	<owl:Thing rdf:about="CocaineHydrochloride">
+		<rdfs:subClassOf rdf:resource="Cocaine"/>
+		<rdfs:label>Cocaine Hydrochloride</rdfs:label>
+		<rdfs:comment>Legally permissible cocaine used as local anaesthetic on mucous membranes, typically used for procedures or surgeries on or through nasal cavities of adults.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="CocaLeaf">
+		<rdfs:subClassOf rdf:resource="Cocaine"/>
+		<rdfs:label>Coca Leaf</rdfs:label>
+		<rdfs:comment>Natural form of the tightly-controlled cocaine, very effective against altitude sickness, malaria, ulcers and asthma.</rdfs:comment>
+	</owl:Thing>
+	<!--Mineral  -->
+	<owl:Thing rdf:about="Lithium">
+		<rdfs:subClassOf rdf:resource="Mineral"/>
+		<rdfs:label>Lithium</rdfs:label>
+		<rdfs:comment>Mineral used for treating bipolar disorder by decreasing abnormal brain activity.</rdfs:comment>
+	</owl:Thing>
+	<!--Anticonvulsant  -->
+	<owl:Thing rdf:about="Valproate">
+		<rdfs:subClassOf rdf:resource="Anticonvulsant"/>
+		<rdfs:label>Valproate</rdfs:label>
+		<rdfs:comment>Used primarily for treating epilepsy and bipolar disorder, occasionally used to prevent migraine.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Lamotrigine">
+		<rdfs:subClassOf rdf:resource="Anticonvulsant"/>
+		<rdfs:label>Lamotrigine</rdfs:label>
+		<rdfs:comment>Used solely for treating epilepsy and stabilisation of mood in bipolar disorder patients.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Carbamazepine">
+		<rdfs:subClassOf rdf:resource="Anticonvulsant"/>
+		<rdfs:label>Carbamazepine</rdfs:label>
+		<rdfs:comment>Used primarily for treating epilepsy, also used in treating schizophrenia and other mental diseases.</rdfs:comment>
+	</owl:Thing>
+	<!--Antipsychotic  -->
+	<owl:Thing rdf:about="Asenapine">
+		<rdfs:subClassOf rdf:resource="Antipsychotic"/>
+		<rdfs:label>Asenapine</rdfs:label>
+		<rdfs:comment>Antipsychotic medication used to treat schizophrenia and manic depression.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Cariprazine">
+		<rdfs:subClassOf rdf:resource="Antipsychotic"/>
+		<rdfs:label>Cariprazine</rdfs:label>
+		<rdfs:comment>Also called Vraylar, used for treating schizophrenia, bipolar mania and bipolar depression.</rdfs:comment>
+	</owl:Thing>
+	<owl:Thing rdf:about="Lurasidone">
+		<rdfs:subClassOf rdf:resource="Antipsychotic"/>
+		<rdfs:label>Lurasidone</rdfs:label>
+		<rdfs:comment>Used for treating schizophrenia and bipolar disorder, may be used with lithium or valproate for treatment of bipolar mania.</rdfs:comment>
+	</owl:Thing>
+</rdf:RDF>
