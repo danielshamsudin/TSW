@@ -27,17 +27,19 @@
       </button>
     </div>
     <br />
-    <div class="btn-group" role="group" style="padding-left: 5rem">
-      Sort By: &nbsp;&nbsp;
-      <button class="btn btn-info" onclick="sortName()">Name</button>
-      <button class="btn btn-info" onclick="sortEngineName()">
-        Engine Name
-      </button>
-      <button class="btn btn-info" onclick="sortEngineCapacity()">
-        Engine Capacity
-      </button>
-      <button class="btn btn-info" onclick="sortPS()">PS</button>
-      <button class="btn btn-info" onclick="sortBoot()">Boot Capacity</button>
+    <div class="container">
+      <div class="btn-group" role="group">
+        Sort By: &nbsp;&nbsp;
+        <button class="btn btn-info" onclick="sortName()">Name</button>
+        <button class="btn btn-info" onclick="sortEngineName()">
+          Engine Name
+        </button>
+        <button class="btn btn-info" onclick="sortEngineCapacity()">
+          Engine Capacity
+        </button>
+        <button class="btn btn-info" onclick="sortPS()">PS</button>
+        <button class="btn btn-info" onclick="sortBoot()">Boot Capacity</button>
+      </div>
     </div>
     <br /><br />
     <div id="demo" class="container"></div>
@@ -152,8 +154,105 @@
             document.getElementById("msg").innerHTML = "";
             var tr = document.createElement("tr");
             var td = document.createElement("td");
-            td.innerHTML =
+            var btn = document.createElement("button");
+            btn.className = "btn btn-info";
+            btn.innerHTML =
               x[i].getElementsByTagName("ModelName")[0].childNodes[0].nodeValue;
+            btn.onclick = function () {
+              document.getElementById("demo").innerHTML = "";
+              document.getElementById("card").style.display = "block";
+              document
+                .getElementById("carImage")
+                .setAttribute(
+                  "src",
+                  "asset/" +
+                    x[i].getElementsByTagName("Image")[0].childNodes[0]
+                      .nodeValue
+                );
+              document.getElementById("carModel").innerHTML =
+                x[i].getElementsByTagName(
+                  "ModelName"
+                )[0].childNodes[0].nodeValue;
+              document.getElementById("engineName").innerHTML =
+                "Engine Name: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+              document.getElementById("cc").innerHTML =
+                "Engine Capacity: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("CC")[0].childNodes[0].nodeValue +
+                "cc";
+              document.getElementById("ps").innerHTML =
+                "PS: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("PS")[0].childNodes[0].nodeValue;
+              document.getElementById("nm").innerHTML =
+                "Torque: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Nm")[0].childNodes[0].nodeValue +
+                "Nm";
+              document.getElementById("trans").innerHTML =
+                "Transmission: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("Trans")[0].childNodes[0].nodeValue;
+              document.getElementById("maxspeed").innerHTML =
+                "Max Speed: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("Engine")[0]
+                  .getElementsByTagName("MaxSpeed")[0].childNodes[0].nodeValue;
+              document.getElementById("numPass").innerHTML =
+                "Number of Passengers: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("NumberOfPassengers")[0].childNodes[0]
+                  .nodeValue +
+                " persons";
+              document.getElementById("sty").innerHTML =
+                "Style: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("Style")[0].childNodes[0].nodeValue;
+              document.getElementById("seatMat").innerHTML =
+                "Seat Material: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("SeatMaterial")[0].childNodes[0]
+                  .nodeValue;
+              document.getElementById("seatHook").innerHTML =
+                "Seat Hook: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("SeatHook")[0].childNodes[0].nodeValue;
+              document.getElementById("bonnetCap").innerHTML =
+                "Boot Capacity: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("BootCapacity")[0].childNodes[0]
+                  .nodeValue;
+              document.getElementById("sus").innerHTML =
+                "Suspension Type: " +
+                x[i]
+                  .getElementsByTagName("Specs")[0]
+                  .getElementsByTagName("BodyStyle")[0]
+                  .getElementsByTagName("Sus")[0].childNodes[0].nodeValue;
+            };
+            td.append(btn);
             tr.appendChild(td);
             td = document.createElement("td");
             td.innerHTML = x[i]
